@@ -49,7 +49,7 @@
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
-  <ol>
+  <pre>
    
     import React, { useState } from "react";
 const AuthContext = React.createContext({
@@ -83,8 +83,8 @@ export default authSlice.reducer;
 
 now define a AuthContextProvider and object that define all Values and return a Provider with {props.children}
 
-step:go on -->index.js and wrap it with AuthContextProvide which is name export{}
-step:now use whenwhere you want to use it
+step: go on -->index.js and wrap it with AuthContextProvide which is name export{}
+step: now use whenwhere you want to use it
 eg import {useContext} from 'react;
    import AuthContext from '.../store
    const authCtx=useContext(AuthContext)
@@ -119,7 +119,7 @@ export const AuthContextProvider = (props) => {
 export default AuthContext;
 
    
-  </ol>
+  </pre>
 </details>
 
 
