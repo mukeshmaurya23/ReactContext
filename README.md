@@ -17,12 +17,7 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+
 
 
 
@@ -56,7 +51,73 @@
   <summary>Table of Contents</summary>
   <ol>
    
-    <li><a href="#roadmap">Roadmap</a></li>
+    import React, { useState } from "react";
+const AuthContext = React.createContext({
+  token: "",
+  isLoggedIn: false,
+  login: (token) => {},
+  logout: () => {},
+});
+
+/*here React.createContext({}) take an object and define the state which you want to access in context
+
+**********************************************************************************************************
+just like  Redux -->createSlice({
+    const authInitialState = { isAuthenticated: false };
+    const authSlice = createSlice({
+            name: "authentication",
+            initialState: authInitialState,
+            reducers: {
+             login(state) {
+                state.isAuthenticated = true;
+                },
+            logout(state) {
+                 state.isAuthenticated = false;
+             },
+  },
+});
+export const authActions = authSlice.actions;
+export default authSlice.reducer;
+    
+******************************************************************************************************
+
+now define a AuthContextProvider and object that define all Values and return a Provider with {props.children}
+
+step:go on -->index.js and wrap it with AuthContextProvide which is name export{}
+step:now use whenwhere you want to use it
+eg import {useContext} from 'react;
+   import AuthContext from '.../store
+   const authCtx=useContext(AuthContext)
+   and use component example
+   authCtx.login(data.property)
+
+*/
+
+export const AuthContextProvider = (props) => {
+  const [token, setToken] = useState(null);
+
+  const userLoggedIn = !!token;
+  const loginHandler = (token) => {
+    setToken(true);
+  };
+  const logoutHandler = () => {
+    setToken(null);
+  };
+
+  const authContext = {
+    login: loginHandler,
+    logout: logoutHandler,
+    isLoggedIn: userLoggedIn,
+    token: token,
+  };
+  return (
+    <AuthContext.Provider value={authContext}>
+      {props.children}
+    </AuthContext.Provider>
+  );
+};
+export default AuthContext;
+
    
   </ol>
 </details>
